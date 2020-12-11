@@ -8,12 +8,12 @@ export default class UserService {
   }
 
   static async getAll(): Promise<User[]> {
-    const users = this.repository().find();
+    const users = await this.repository().find();
     return users;
   }
 
   static async getByEmail(email: string): Promise<User> {
-    const user = this.repository().findOne({ where: { email } });
+    const user = await this.repository().findOne({ where: { email } });
 
     if (!user) {
       throw new Error('Non-existing user');

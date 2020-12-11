@@ -1,11 +1,12 @@
-import { QueryRunner, Table } from 'typeorm';
+/* eslint-disable class-methods-use-this */
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class User1607605402379 {
-  public static async up(queryRunner: QueryRunner): Promise<void> {
+export default class User1607605402379 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
 
     await queryRunner.createTable(new Table({
-      name: 'users',
+      name: 'User',
       columns: [
         {
           name: 'id',
@@ -23,8 +24,8 @@ export default class User1607605402379 {
     }));
   }
 
-  public static async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('User');
     await queryRunner.query('DROP EXTENSION "uuid-ossp"');
   }
 }
